@@ -30,7 +30,7 @@ async function handle(req, res) {
       const upstream = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${process.env.ELEVENLABS_VOICE_ID}`, {
         method: "POST",
         headers: { "xi-api-key": process.env.ELEVENLABS_API_KEY, "content-type": "application/json", accept: "audio/mpeg" },
-        body: JSON.stringify({ text, model_id: "eleven_multilingual_v2", voice_settings: { stability: 0.55, similarity_boost: 0.75 } })
+        body: JSON.stringify({ text, model_id: "eleven_v3", voice_settings: { stability: 0.55, similarity_boost: 0.75 } })
       });
       if (!upstream.ok) return json(res, upstream.status, { error: `ElevenLabs error (${upstream.status}).` });
       const audio = Buffer.from(await upstream.arrayBuffer());
